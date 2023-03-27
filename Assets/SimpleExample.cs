@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class SimpleExample : MonoBehaviour
 {
-    
+
     // Please fill clientId and clientSecret of your application before starting
-    private string _clientId = "";
-    private string _clientSecret = "";
-    private string _appName = "UnityApp";
-    private string _appVersion = "3.3.0";
+    private string _clientId = "8WpfvM0FQVmoa7GS0zsg3udOpyef3t6wdY7ssCYg";
+    private string _clientSecret = "UTd6eHMjNCIHfVe4JrUiKtWAlwpuLIRcWSozjv2Y2VPi5DJNkL6rBfM8JqP9rRwT6cfD67wk3Vg6SDFENosEUqsusHZ6Oz0oVAlVRUVjSMRihZWT5DgVMvJpKp2DDwpv";
+    private string _appName = "alexithymia-ex-machina-beta";
+    private string _appVersion = "0.0.1";
 
     EmotivUnityItf _eItf = EmotivUnityItf.Instance;
     float _timerDataUpdate = 0;
@@ -39,8 +39,8 @@ public class SimpleExample : MonoBehaviour
     [SerializeField] public Toggle SYSToggle;
 
     [SerializeField] public Text MessageLog;
-    
-    
+
+
     void Start()
     {
         // init EmotivUnityItf without data buffer using
@@ -55,13 +55,13 @@ public class SimpleExample : MonoBehaviour
     void Update()
     {
         _timerDataUpdate += Time.deltaTime;
-        if (_timerDataUpdate < TIME_UPDATE_DATA) 
+        if (_timerDataUpdate < TIME_UPDATE_DATA)
             return;
 
         _timerDataUpdate -= TIME_UPDATE_DATA;
         // update message log
         MessageLog.text = _eItf.MessageLog;
-        
+
         if (!_eItf.IsAuthorizedOK)
             return;
 
@@ -92,7 +92,7 @@ public class SimpleExample : MonoBehaviour
     }
 
     /// <summary>
-    /// create session 
+    /// create session
     /// </summary>
     public void onCreateSessionBtnClick() {
         Debug.Log("onCreateSessionBtnClick");
@@ -107,7 +107,7 @@ public class SimpleExample : MonoBehaviour
     }
 
     /// <summary>
-    /// start a record 
+    /// start a record
     /// </summary>
     public void onStartRecordBtnClick() {
         Debug.Log("onStartRecordBtnClick " + RecordTitle.text + ":" + RecordDescription.text);
@@ -121,7 +121,7 @@ public class SimpleExample : MonoBehaviour
     }
 
     /// <summary>
-    /// start a record 
+    /// start a record
     /// </summary>
     public void onStopRecordBtnClick() {
         Debug.Log("onStopRecordBtnClick");
@@ -258,7 +258,7 @@ public class SimpleExample : MonoBehaviour
 
         if (!_eItf.IsSessionCreated)
             return;
-        
+
         // make startRecordBtn interactable
         Button startRecordBtn = GameObject.Find("RecordPart").transform.Find("startRecordBtn").GetComponent<Button>();
         Button subscribeBtn = GameObject.Find("SubscribeDataPart").transform.Find("subscribeBtn").GetComponent<Button>();
