@@ -4,14 +4,18 @@ using EmotivUnityPlugin;
 
 namespace dirox.emotiv.controller
 {
-    public class Headset3DController : MonoBehaviour
+    public class HeadsetController3D : MonoBehaviour
     {
 
         [SerializeField] private GameObject insight;
-        [SerializeField] private GameObject epoc;
+        // we don't use epoc
+        // [SerializeField] private GameObject epoc;
+        [SerializeField] private float updateCQInterval = 0.5f;
 
         [Inject]
-        public void InjectDependencies (ConnectedDevice connectedDevice)
+        public void InjectDependencies (
+            ConnectedDevice connectedDevice
+        )
         {
             connectedDevice.onHeadsetSelected += setConnectedHeadset;
         }
@@ -20,8 +24,10 @@ namespace dirox.emotiv.controller
         {
             bool isInsightConnected = Utils.IsInsightType(selectedHeadsetInformation.HeadsetType);
 
-            insight.SetActive (isInsightConnected);
-            epoc.SetActive (!isInsightConnected);
+            insight.SetActive(isInsightConnected);
+            Debug.Log(insight);
+            // epoc.SetActive (!isInsightConnected);
         }
+
     }
 }

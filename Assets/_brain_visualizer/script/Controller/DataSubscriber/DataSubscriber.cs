@@ -17,20 +17,20 @@ namespace dirox.emotiv.controller
         [SerializeField] private Text  eegHeader;     // header of eeg data exclude MARKERS
         [SerializeField] private Text  eegData;      // eeg data stream
         [SerializeField] private Text  motHeader;    // header of motion data
-        [SerializeField] private Text  motData;      // motion data 
+        [SerializeField] private Text  motData;      // motion data
         [SerializeField] private Text  pmHeader;     // header of performance metric data
         [SerializeField] private Text  pmData;       // performance metric data
         float _timerDataUpdate = 0;
         const float TIME_UPDATE_DATA = 1f;
 
-        void Update() 
+        void Update()
         {
             if (!this.isActive) {
                 return;
             }
 
             _timerDataUpdate += Time.deltaTime;
-            if (_timerDataUpdate < TIME_UPDATE_DATA) 
+            if (_timerDataUpdate < TIME_UPDATE_DATA)
                 return;
 
             _timerDataUpdate -= TIME_UPDATE_DATA;
@@ -58,7 +58,9 @@ namespace dirox.emotiv.controller
                 string motDataStr   = "Motion Data: ";
                 foreach (var ele in DataStreamManager.Instance.GetMotionChannels()) {
                     string chanStr  = ChannelStringList.ChannelToString(ele);
-                    double[] data     = DataStreamManager.Instance.GetMotionData(ele);
+                    // double is similar to a float
+                    double[] data     = DataStreamManager.Instance.GetMotionData
+                    (ele);
                     motHeaderStr    += chanStr + ", ";
                     if (data != null && data.Length > 0)
                         motDataStr      +=  data[0].ToString() + ", ";
@@ -76,6 +78,7 @@ namespace dirox.emotiv.controller
                 foreach (var ele in DataStreamManager.Instance.GetPMLists()) {
                     string chanStr  = ele;
                     double data     = DataStreamManager.Instance.GetPMData(ele);
+                    Debug.Log(data);
                     if (chanStr == "TIMESTAMP" && (data == -1))
                     {
                         // has no new update of performance metric data
@@ -89,7 +92,7 @@ namespace dirox.emotiv.controller
                     pmHeader.text  = pmHeaderStr;
                     pmData.text    = pmDataStr;
                 }
-                
+
             }
         }
 

@@ -19,13 +19,16 @@ namespace dirox.emotiv.controller
         //DataSubscriber dataSubscriber;
         ExamplesBoard examplesBoard;
 
-                
+
         public Text displayText;
 
         [Inject]
-        public void SetDependencies (ConnectedDevice device, HeadsetGroup headsetGroup,
-                                     ConnectionIndicatorGroup connectionIndicatorGroup,
-                                     ExamplesBoard board)
+        public void SetDependencies (
+            ConnectedDevice device,
+            HeadsetGroup headsetGroup,
+            ConnectionIndicatorGroup connectionIndicatorGroup,
+            ExamplesBoard board
+        )
         {
             this.connectedDevice  = device;
             this.headsetGroup     = headsetGroup;
@@ -68,7 +71,7 @@ namespace dirox.emotiv.controller
             // dataSubscriber.Activate();
             // connectionIndicatorGroup.Activate ();
         }
-            
+
         public void QuickOpen() {
             Activate();
         }
@@ -76,7 +79,7 @@ namespace dirox.emotiv.controller
         public void DisplayContactQualityColor() {
             activeDevice.SetContactQualityColor(DataProcessing.Instance.GetContactQuality());
         }
-                    
+
         IEnumerator RunCoroutineDisplayColor(float timeInteval) {
             while(this.IsActive) {
                 DisplayContactQualityColor();
