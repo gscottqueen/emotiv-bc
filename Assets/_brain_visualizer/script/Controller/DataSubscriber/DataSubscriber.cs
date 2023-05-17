@@ -25,38 +25,32 @@ namespace dirox.emotiv.controller
     float _timerDataUpdate = 0;
     const float TIME_UPDATE_DATA = .01f;
 
+    // motData
+/*    public double[] data;
+    public string chanStr;*/
+
     [SerializeField] private GameObject motionCube;       // a simple cube we can manipulate with data
 
     // Quaternion values
-    private double qW;
-    private double qX;
-    private double qY;
-    private double qZ;
+    [SerializeField] private double qW;
+    [SerializeField] private double qX;
+    [SerializeField] private double qY;
+    [SerializeField] private double qZ;
 
     // Acceleration values
-    private double accelerationX;
-    private double accelerationY;
-    private double accelerationZ;
+    [SerializeField] private double accelerationX;
+    [SerializeField] private double accelerationY;
+    [SerializeField] private double accelerationZ;
 
-    // create an object that contains channel data and label
-    /*    public class QuaternionValue
-        {
-          // Auto-implemented properties.
-          public string? Channel { get; set; }
-          public int Data { get; set; }
-        }
+    [SerializeField] private GameObject engagement;
+    [SerializeField] private GameObject excitement;
+    [SerializeField] private GameObject longTermExcitement;
+    [SerializeField] private GameObject stress;
+    [SerializeField] private GameObject relaxation;
+    [SerializeField] private GameObject interest;
+    [SerializeField] private GameObject focus;
 
-        // create a list of objects that contains the channel objects
-        class QuaternionValues
-        {
-          static values = new List<QuaternionValue>();
-
-          public bool AddQuaternionValue(string channel, int data)
-          {
-            values.Add(new QuaternionValue { Channel = channel, Data = data });
-            return true;
-          }
-        }*/
+    // pmData
 
     void Update()
     {
@@ -92,21 +86,15 @@ namespace dirox.emotiv.controller
         string motHeaderStr = "Motion Header: ";
         string motDataStr = "Motion Data: ";
 
-        // create an array of the channels we want to use
-        /*string[] quaternianChannels = new string[] { "CHAN_Q0", "CHAN_Q1", "CHAN_Q2", "CHAN_Q3" };*/
+          // get each element from within the data stream manager
+          foreach (var ele in DataStreamManager.Instance.GetMotionChannels())
+          {
+            string chanStr = ChannelStringList.ChannelToString(ele);
+            // double is similar to a float
+            double[] data = DataStreamManager.Instance.GetMotionData(ele);
 
-        // initalize an empty list
-        /*var _qValues = new QuaternionValues();*/
-
-                // get each element from within the data stream manager
-                foreach (var ele in DataStreamManager.Instance.GetMotionChannels())
-                {
-                  string chanStr = ChannelStringList.ChannelToString(ele);
-                  // double is similar to a float
-                  double[] data = DataStreamManager.Instance.GetMotionData(ele);
-
-                  motHeaderStr += chanStr + ", ";
-          Debug.Log(chanStr);
+            motHeaderStr += chanStr + ", ";
+  
           if (data != null && data.Length > 0)
           {
             motDataStr += data[0].ToString() + ", ";
@@ -128,14 +116,15 @@ namespace dirox.emotiv.controller
             motHeader.text = motHeaderStr;
             motData.text = motDataStr;
 
-            // Update the rotation based on quaternion values
-            Quaternion rotation = new Quaternion((float)qX, (float)qY, (float)qZ, (float)qW);
-            motionCube.transform.rotation = rotation;
+        // Update the rotation based on quaternion values
+        Quaternion rotation = new Quaternion((float)qX, (float)qY, (float)qZ, (float)qW);
+        motionCube.transform.rotation = rotation;
 
-            // Apply rotation based on acceleration values
-            Vector3 acceleration = new Vector3((float)accelerationX, (float)accelerationY, (float)accelerationZ);
-            motionCube.transform.Rotate(acceleration * Time.deltaTime);
+        // Apply rotation based on acceleration values
+        Vector3 acceleration = new Vector3((float)accelerationX, (float)accelerationY, (float)accelerationZ);
+        motionCube.transform.Rotate(acceleration * Time.deltaTime);
       }
+
       // update pm data
       if (DataStreamManager.Instance.GetNumberPMSamples() > 0) {
                 string pmHeaderStr = "Performance metrics Header: ";
@@ -144,13 +133,31 @@ namespace dirox.emotiv.controller
                 foreach (var ele in DataStreamManager.Instance.GetPMLists()) {
                     string chanStr  = ele;
                     double data     = DataStreamManager.Instance.GetPMData(ele);
-                    Debug.Log(data);
                     if (chanStr == "TIMESTAMP" && (data == -1))
                     {
                         // has no new update of performance metric data
                         hasPMUpdate = false;
                         break;
                     }
+          Debug.Log(chanStr);
+          Debug.Log((float)data);
+          if (chanStr == "eng")
+                    {
+                      Color curColor = engagement.GetComponent<Renderer>().material.color;
+                      engagement.GetComponent<Renderer>().material.color = new Color(
+                        curColor.r, 
+                        curColor.g, 
+                        curColor.b, 
+                        ((float)data * 100) / 2
+                        ); ;
+                    }
+/*                    if (chanStr == "exc") excitement.GetComponent<Renderer>().material.color.a = data;
+                    if (chanStr == "lex") longTermExcitement.GetComponent<Renderer>().material.color.a = data;
+                    if (chanStr == "str") stress.GetComponent<Renderer>().material.color.a = data;
+                    if (chanStr == "rel") relaxation.GetComponent<Renderer>().material.color.a = data;
+                    if (chanStr == "int") interest.GetComponent<Renderer>().material.color.a = data;
+                    if (chanStr == "foc") focus.GetComponent<Renderer>().material.color.a = data;*/
+
                     pmHeaderStr    += chanStr + ", ";
                     pmDataStr      +=  data.ToString() + ", ";
                 }
