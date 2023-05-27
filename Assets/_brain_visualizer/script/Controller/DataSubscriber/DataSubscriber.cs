@@ -47,7 +47,8 @@ namespace dirox.emotiv.controller
     [SerializeField] private GameObject longTermExcitement;
     [SerializeField] private GameObject stress;
     [SerializeField] private GameObject relaxation;
-    [SerializeField] private GameObject interest; 
+    [SerializeField] private GameObject interest;
+    [SerializeField] private GameObject focus;
 
     // pmData
 
@@ -141,90 +142,89 @@ namespace dirox.emotiv.controller
                   Debug.Log(chanStr);
                   Debug.Log(((float)data));
 
-                  if (chanStr == "eng")
-                    {
-                      /*double[] values = new double[data];*/
-                      /*double alpha = values[1] - values[0]*/
-                      /*Vector3 interpolatedValue = Vector3.Lerp((float)values[0], (float)values[1], 2.5f);*/
-                      // get data a then data b transition over time
-                      Color curColor = engagement.GetComponent<Renderer>().material.color;
-                      engagement.GetComponent<Renderer>().material.color = new Color(
-                        curColor.r, 
-                        curColor.g, 
-                        curColor.b,
-                        (float)data
-                        );
-                    }
-               /* if (chanStr == "eng")
-                {
-                  Color curColor = engagement.GetComponent<Renderer>().material.color;
-                  engagement.GetComponent<Renderer>().material.color = new Color(
-                    curColor.r,
-                    curColor.g,
-                    curColor.b,
-                    (float)alpha
-                    );
-                }
-                if (chanStr == "exc")
-                {
-                  Color curColor = excitement.GetComponent<Renderer>().material.color;
-                  excitement.GetComponent<Renderer>().material.color = new Color(
-                    curColor.r,
-                    curColor.g,
-                    curColor.b,
-                    (float)alpha
-                    );
-                }
-                if (chanStr == "lex")
-                {
-                  Color curColor = longTermExcitement.GetComponent<Renderer>().material.color;
-                  longTermExcitement.GetComponent<Renderer>().material.color = new Color(
-                    curColor.r,
-                    curColor.g,
-                    curColor.b,
-                    (float)alpha
-                    );
-                }
-                if (chanStr == "str")
-                {
-                  Color curColor = stress.GetComponent<Renderer>().material.color;
-                  stress.GetComponent<Renderer>().material.color = new Color(
-                    curColor.r,
-                    curColor.g,
-                    curColor.b,
-                    (float)alpha
-                    );
-                }
-                if (chanStr == "rel")
-                {
-                  Color curColor = relaxation.GetComponent<Renderer>().material.color;
-                  relaxation.GetComponent<Renderer>().material.color = new Color(
-                    curColor.r,
-                    curColor.g,
-                    curColor.b,
-                    (float)alpha
-                    );
-                }
-                if (chanStr == "int")
-                {
-                  Color curColor = interest.GetComponent<Renderer>().material.color;
-                  interest.GetComponent<Renderer>().material.color = new Color(
-                    curColor.r,
-                    curColor.g,
-                    curColor.b,
-                    (float)alpha
-                    );
-                }
-                if (chanStr == "foc")
-                {
-                  Color curColor = focus.GetComponent<Renderer>().material.color;
-                  focus.GetComponent<Renderer>().material.color = new Color(
-                    curColor.r,
-                    curColor.g,
-                    curColor.b,
-                    (float)alpha
-                    );
-                }*/
+          /*                  if (chanStr == "eng")
+                              {
+                                *//*double[] values = new double[data];*/
+          /*double alpha = values[1] - values[0]*/
+          /*Vector3 interpolatedValue = Vector3.Lerp((float)values[0], (float)values[1], 2.5f);*//*
+          // get data a then data b transition over time
+          Color curColor = engagement.GetComponent<Renderer>().material.color;
+          engagement.GetComponent<Renderer>().material.color = new Color(
+            curColor.r, 
+            curColor.g, 
+            curColor.b,
+            (float)data
+            );
+        }*/
+          /* if (chanStr == "eng")
+           {
+             Color curColor = engagement.GetComponent<Renderer>().material.color;
+             engagement.GetComponent<Renderer>().material.color = new Color(
+               curColor.r,
+               curColor.g,
+               curColor.b,
+               (float)alpha
+               );
+           }
+           if (chanStr == "exc")
+           {
+             Color curColor = excitement.GetComponent<Renderer>().material.color;
+             excitement.GetComponent<Renderer>().material.color = new Color(
+               curColor.r,
+               curColor.g,
+               curColor.b,
+               (float)alpha
+               );
+           }
+           if (chanStr == "lex")
+           {
+             Color curColor = longTermExcitement.GetComponent<Renderer>().material.color;
+             longTermExcitement.GetComponent<Renderer>().material.color = new Color(
+               curColor.r,
+               curColor.g,
+               curColor.b,
+               (float)alpha
+               );
+           }
+           if (chanStr == "str")
+           {
+             Color curColor = stress.GetComponent<Renderer>().material.color;
+             stress.GetComponent<Renderer>().material.color = new Color(
+               curColor.r,
+               curColor.g,
+               curColor.b,
+               (float)alpha
+               );
+           }
+           if (chanStr == "rel")
+           {
+             Color curColor = relaxation.GetComponent<Renderer>().material.color;
+             relaxation.GetComponent<Renderer>().material.color = new Color(
+               curColor.r,
+               curColor.g,
+               curColor.b,
+               (float)alpha
+               );
+           }
+          */
+          if (data > -1)
+          {
+            engagement.SetActive(true);
+            excitement.SetActive(true);
+            stress.SetActive(true);
+            relaxation.SetActive(true);
+            interest.SetActive(true);
+            focus.SetActive(true);
+          }
+          else
+          {
+            engagement.SetActive(true);
+            excitement.SetActive(false);
+            stress.SetActive(false);
+            relaxation.SetActive(false);
+            interest.SetActive(false);
+            focus.SetActive(false);
+          }
 
           pmHeaderStr    += chanStr + ", ";
                     pmDataStr      +=  data.ToString() + ", ";
