@@ -16,11 +16,8 @@ namespace dirox.emotiv.controller
         HeadsetGroup headsetGroup;
         ContactQualityBaseManager activeDevice;
         ConnectionIndicatorGroup connectionIndicatorGroup;
-        //DataSubscriber dataSubscriber;
         ExamplesBoard examplesBoard;
 
-/*
-        public Text displayText;*/
 
         [Inject]
         public void SetDependencies (
@@ -33,21 +30,17 @@ namespace dirox.emotiv.controller
             this.connectedDevice  = device;
             this.headsetGroup     = headsetGroup;
             this.connectionIndicatorGroup = connectionIndicatorGroup;
-            // dataSubscriber = subscriber;
             examplesBoard = board;
         }
 
         public override void Activate ()
         {
             Debug.Log("ContactQualityController Active");
-            // deactive other screen if have
-            //examplesBoard.Deactivate();
 
             headsetGroup.Activate();
             connectionIndicatorGroup.Activate ();
 
             activeDevice = Utils.IsInsightType(connectedDevice.Information.HeadsetType) ? insight : epoc;
-            activeDevice.gameObject.SetActive(true);
             base.Activate ();
 
             StartCoroutine(RunCoroutineDisplayColor(updateCQInterval));
@@ -62,15 +55,6 @@ namespace dirox.emotiv.controller
 
             if (activeDevice != null)
                 activeDevice.gameObject.SetActive(false);
-        }
-
-        public void onButtonDone()
-        {
-            Deactivate();
-            /*examplesBoard.Activate();*/
-
-            // dataSubscriber.Activate();
-            // connectionIndicatorGroup.Activate ();
         }
 
         public void QuickOpen() {

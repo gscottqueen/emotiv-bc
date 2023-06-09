@@ -55,17 +55,28 @@ namespace dirox.emotiv.controller
       public void SetGOQuality(ContactQualityValue quality)
       {
       Debug.Log("in GO");
-        if (gameObject != null)
-        {
+      if (gameObject != null)
+      {
         Debug.Log("setting GO quality");
         Debug.Log(gameObject);
         int ordinal = (int)quality;
-        gameObject.GetComponent<Renderer>().material.color = new Color(
-          colors[ordinal].r,
-          colors[ordinal].g,
-          colors[ordinal].b
-          );
-    }
+
+
+        if (gameObject.GetComponent<Light>()) { 
+          gameObject.GetComponent<Light>().color = new Color(
+            colors[ordinal].r,
+            colors[ordinal].g,
+            colors[ordinal].b
+            );
+        } else
+        {
+          gameObject.GetComponent<Renderer>().material.color = new Color(
+            colors[ordinal].r,
+            colors[ordinal].g,
+            colors[ordinal].b
+            );
+        }
       }
     }
+  }
 }

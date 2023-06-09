@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &224421648819430040
 RectTransform:
   m_ObjectHideFlags: 0
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044072970509388}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -95,13 +95,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7baa7d71b017c14fbd0d49a12fc9cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AF3: {fileID: 114768375592554360}
-  T7: {fileID: 114005002890743864}
-  PZ: {fileID: 114901050009376388}
-  T8: {fileID: 114746762138447828}
-  AF4: {fileID: 114306368132936940}
-  CMS: {fileID: 114704237543358190}
   AF3GO: {fileID: 0}
+  T7GO: {fileID: 0}
+  PZGO: {fileID: 0}
+  T8GO: {fileID: 0}
+  AF4GO: {fileID: 0}
+  CMSGO: {fileID: 0}
 --- !u!1 &1108492400342642
 GameObject:
   m_ObjectHideFlags: 0
