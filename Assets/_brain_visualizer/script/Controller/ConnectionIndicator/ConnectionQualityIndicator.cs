@@ -42,7 +42,6 @@ namespace dirox.emotiv.controller
 
             SetIndicatorDisplay(qualityLevel);
             SetQualityLevelTextDisplay(qualityLevel, qualityLevelText);
-            SetQualityLevelTextDisplay(qualityLevel, contactQualityController.displayText, true);
         }
 
         private void SetQualityLevelTextDisplay(float qualityLevel, Text qualityText, bool withPercentageSuffix = false){

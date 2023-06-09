@@ -14,13 +14,13 @@ namespace dirox.emotiv.controller
 
         ConnectedDevice connectedDevice;
         HeadsetGroup headsetGroup;
-        ContactQualityBaseManager  activeDevice;
-        ConnectionIndicatorGroup   connectionIndicatorGroup;
+        ContactQualityBaseManager activeDevice;
+        ConnectionIndicatorGroup connectionIndicatorGroup;
         //DataSubscriber dataSubscriber;
         ExamplesBoard examplesBoard;
 
-
-        public Text displayText;
+/*
+        public Text displayText;*/
 
         [Inject]
         public void SetDependencies (
@@ -51,7 +51,8 @@ namespace dirox.emotiv.controller
             base.Activate ();
 
             StartCoroutine(RunCoroutineDisplayColor(updateCQInterval));
-        }
+            examplesBoard.Activate(); // activate our data subscriptions
+    }
 
         public override void Deactivate ()
         {
@@ -66,7 +67,7 @@ namespace dirox.emotiv.controller
         public void onButtonDone()
         {
             Deactivate();
-            examplesBoard.Activate();
+            /*examplesBoard.Activate();*/
 
             // dataSubscriber.Activate();
             // connectionIndicatorGroup.Activate ();
