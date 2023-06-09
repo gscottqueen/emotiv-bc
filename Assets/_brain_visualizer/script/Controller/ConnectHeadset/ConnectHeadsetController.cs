@@ -30,7 +30,7 @@ namespace dirox.emotiv.controller
         
         ConnectToCortexStates _lastState;
         float _timerCortex_state = 0;
-        const float TIME_UPDATE_CORTEX_STATE = 2f;
+        const float TIME_UPDATE_CORTEX_STATE = 1f;
         bool _enableChecking = false;
 
         [Inject]
@@ -154,7 +154,7 @@ namespace dirox.emotiv.controller
             yield return new WaitForSeconds(delayTime);
             fadeImage.DOColor(tempColor, delayTime);
         }
-        
+
         bool updateCortexStates ()
         {
             if (!_enableChecking)

@@ -11,44 +11,16 @@ namespace dirox.emotiv.controller
 
         // data subscribers
         DataSubscriber dataSubscriber;
-
-        // injectmarkers
-        MarkersDemo markersDemo;
         
         [Inject]
-        public void SetDependencies(DataSubscriber subscriber, MarkersDemo markers)
+        public void SetDependencies(DataSubscriber subscriber)
         {
-            dataSubscriber = subscriber;
-            markersDemo = markers;
+           dataSubscriber = subscriber;
         }
         public override void Activate()
         {
-            Debug.Log("ExamplesBoard: Activate");
-            if (markersDemo.IsActive)
-                markersDemo.Deactivate();
-            if (dataSubscriber.IsActive)
-                dataSubscriber.Deactivate();
-            base.Activate();
+          Deactivate();
+          dataSubscriber.Activate();
         }
-
-        /// <summary>
-        /// go to data subscriber example
-        /// </summary>
-        public void onBtnSubscriberClick() {
-            Debug.Log("onBtnSubscriberClick");
-            Deactivate();
-            dataSubscriber.Activate();
-        }
-
-
-        /// <summary>
-        /// go to injectmarkers example
-        /// </summary>
-        public void onBtnMarkersClick() {
-            Debug.Log("onBtnMarkersClick");
-            Deactivate();
-            markersDemo.Activate();
-        }
-
     }
 }
