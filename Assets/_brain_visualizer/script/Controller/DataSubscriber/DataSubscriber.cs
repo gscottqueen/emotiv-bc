@@ -16,8 +16,6 @@ namespace dirox.emotiv.controller
   {
     DataStreamManager _dataStreamMgr = DataStreamManager.Instance;
 
-    [SerializeField] private Text motData;      // motion data
-    [SerializeField] private Text pmData;       // performance metric data
     float _timerDataUpdate = 0;
     const float TIME_UPDATE_DATA = .01f;
 
