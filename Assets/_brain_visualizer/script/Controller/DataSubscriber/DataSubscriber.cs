@@ -96,7 +96,7 @@ namespace dirox.emotiv.controller
         {
           string chanStr = ele;
           double data = DataStreamManager.Instance.GetPMData(ele);
-          if (data > -1)
+         /* if (data > -1)
           {
             engagement.SetActive(true);
             excitement.SetActive(true);
@@ -113,7 +113,7 @@ namespace dirox.emotiv.controller
             relaxation.SetActive(false);
             interest.SetActive(false);
             focus.SetActive(false);
-          }
+          }*/
         }
       }
     }
